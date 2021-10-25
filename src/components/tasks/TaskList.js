@@ -5,14 +5,6 @@ import TaskListRowEdit from './TaskListRowEdit';
 import { connect } from 'react-redux'
 import { updateTask, deleteTask, completedTask } from '../store/actions/taskActions'
 
-// function searchingFor(search) {
-//     return function(s) {
-//         return s.first?.toLowerCase()
-//         .includes(search?.toLowerCase()) || 
-//         !search;
-//     }
-// }
-
 function TaskList(props) {
     const { tasks } = props;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
