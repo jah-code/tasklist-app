@@ -1,20 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import AddTaskModal from './AddTaskModal';
 import TaskListRow from './TaskListRow'
 import TaskListRowEdit from './TaskListRowEdit';
+import { connect } from 'react-redux'
+import { updateTask } from '../store/actions/taskActions'
 
 function TaskList(props) {
     const {tasks} = props;
     const [ modalIsOpen, setModalIsOpen ] = useState(false);
-    const [ taskRow, setTaskRow ] = useState(true);
-
-    // const showRow = taskRow ? <TaskListRow/> : <TaskListRowEdit/>;
-
-    function handleClickEdit(id) {
-        // setTaskRow(false);
-        {tasks.map((task) => {task.id === id ? setTaskRow(false) : setTaskRow(true)} )}
-    }
+    const [ editTaskId, setEditTaskId ] = useState(null);
+    const [ editTaskRow, setEditTaskRow ] = useState({
+        taskname: "",
+        id: ""
+    })
     
+    
+    function handleClickEdit(task) {
+        setEditTaskId(task.id);
+
+        const rowFormValues = {
+            taskname: task.taskname,
+            id: task.id
+        }
+
+        setEditTaskRow(rowFormValues)
+    }
+
+    function handleClickCancel(id) {
+        setEditTaskId(null);
+    }
+
+    function handleEditChange(e) {
+        const fieldName = e.target.getAttribute('id');
+        const fieldValue = e.target.value;
+
+        const newRowData = { ...editTaskRow };
+        newRowData[fieldName] = fieldValue;
+
+        setEditTaskRow(newRowData)
+        // console.log(newRowData);
+    }
+
+    function handleRowSubmit(e) {
+        e.preventDefault();
+        console.log(editTaskRow);
+    }
 
     return (
         <div className="task-list">
@@ -36,25 +66,32 @@ function TaskList(props) {
             </div>
 
             <div className="task-table z-depth-2">
-                <form action="">
+                <form action="" onSubmit={handleRowSubmit}>
                     <table>
                         <tbody>
-                            {tasks && tasks.map((task) => {
-                                return (<tr key={task.id}>
-                                { taskRow ?
-                                    <TaskListRow task={task} handleClickEdit={handleClickEdit}/> :
-                                    <TaskListRowEdit setTaskRow={setTaskRow}/>
-                                }    
-                                </tr>)      
-                            })}
+                            {tasks && tasks.map((task) => (
+                                <Fragment key={task.id}>
+                                    { editTaskId === task.id ? (
+                                    <TaskListRowEdit task={task} handleClickCancel={handleClickCancel} editTaskRow={editTaskRow} handleEditChange={handleEditChange}/>
+                                     ) : ( 
+                                     <TaskListRow task={task} handleClickEdit={handleClickEdit}/> 
+                                     )}
+                                </Fragment>
+                            ))}
                         </tbody>
                     </table>
                 </form>
             </div>
 
-            <AddTaskModal modalIsOpen={modalIsOpen}/>
+            <AddTaskModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>
         </div>          
     )
 }
+    
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateTask: (id) => dispatch(updateTask(id))
+    }
+}
 
-export default TaskList
+export default connect(null, mapDispatchToProps)(TaskList)

@@ -10,7 +10,7 @@ function TaskListRow(props) {
     }
 
     return (
-        <>
+        <tr>
             <td style={{'width': '5%'}}>
             </td>
             <td style={{'width': '85%'}}>
@@ -19,7 +19,7 @@ function TaskListRow(props) {
                 </span>
             </td>
             <td className="col s1">
-                <div className="btn-action" onClick={() => handleClickEdit(task.id)}>
+                <div className="btn-action" onClick={() => handleClickEdit(task)}>
                     <i className="material-icons">edit</i>
                 </div>
             </td>
@@ -28,7 +28,7 @@ function TaskListRow(props) {
                     <i className="material-icons">delete</i>
                 </div>
             </td>
-        </>
+        </tr>
     )
 }
 

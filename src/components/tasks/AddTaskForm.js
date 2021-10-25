@@ -16,13 +16,17 @@ class AddTaskForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTask(this.state);
+        console.log(this.state);
+        this.setState({
+            taskname: ""
+        })
     }
 
     render() { 
         return (
             <form action="" className="add-task-form" onSubmit={this.handleSubmit}>
                 <div className="input-field add-task-input-field">
-                    <input type="text" className="validate" 
+                    <input type="text" className="validate" value={this.state.taskname}
                         id="taskname" placeholder="Task Name" onChange={this.handleChange}/>
                 </div>
                 <button className="btn blue accent-2 waves-effect waves-light" 

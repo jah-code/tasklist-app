@@ -81,6 +81,11 @@ canvas {
     padding: 0 10px;
     margin-top: 2em;
 }
+
+.edit-task-input-field  {
+    padding: 0 15px;
+}
+
 .add-task-form .btn {
     width: 100%;
     margin-top: 16px;
@@ -97,6 +102,11 @@ canvas {
 
 .btn-action:hover {
     color: #448aff;
+}
+
+button.btn-action {
+    background: none;
+    border: none;
 }
 
 [type="checkbox"].filled-in:checked+span:not(.lever):after {

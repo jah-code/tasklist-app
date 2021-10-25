@@ -1,51 +1,32 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { deleteTask } from '../store/actions/taskActions'
 
 class TaskListRowEdit extends Component {
-    
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    }
-
-    handleClickCancel = () => {
-        this.props.setTaskRow(true);
-    }
-
     render() {
+        const { task, handleClickCancel, handleEditChange, editTaskRow } = this.props;
 
         return (
-            <>
+            <tr>
                 <td style={{'width': '5%'}}>
                 </td>
                 <td style={{'width': '85%'}}>
-                    <div className="input-field add-task-input-field">
-                        <input type="text" className="validate" 
-                            id="taskname" placeholder="Task Name" onChange={this.handleChange}/>
+                    <div className="input-field edit-task-input-field">
+                        <input type="text" className="validate" value={editTaskRow.taskname}
+                            id="taskname" placeholder={task.taskname} onChange={handleEditChange}/>
                     </div>
                 </td>
                 <td className="col s1" style={{'width': '5%'}}>
-                    <div className="btn-action">
+                    <button className="btn-action" type="submit">
                         <i className="material-icons">check</i>
-                    </div>
+                    </button>
                 </td>
                 <td style={{'width': '5%'}}>
-                    <div className="btn-action" onClick={this.handleClickCancel}>
+                    <div className="btn-action" onClick={() => handleClickCancel(task.id)}>
                         <i className="material-icons">close</i>
                     </div>
                 </td>
-            </>
+            </tr>
         );
     }
 }
- 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        deleteTask: (id) => dispatch(deleteTask(id))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(TaskListRowEdit)
+export default TaskListRowEdit

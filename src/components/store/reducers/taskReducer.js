@@ -18,6 +18,9 @@ const taskReducer = (state = initialState, action) => {
         case 'DELETE_TASK' :
             console.log('Delete Task');
             return state;
+        case 'UPDATE_TASK' :
+            console.log('Update Task');
+            return state;
         default :
             return state;
     }
