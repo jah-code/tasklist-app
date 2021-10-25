@@ -72,7 +72,7 @@ canvas {
 
 .ReactModal__Content {
     width: 320px;
-    height: 210px;
+    height: 220px;
     margin: auto;
     border-radius: 10px !important;
 }
@@ -132,4 +132,40 @@ button.btn-action {
 .no-task-title {
     font-size: 18px;
     margin-bottom: 15px;
+}
+
+.task-list .row {
+    margin-bottom: 0;
+}
+
+.task-list .row div.col {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.task-table {
+    margin: 8px;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: #7e7e7e;
+}
+
+.task-todo {
+    color: #448aff;
+}
+
+.row-checkbox {
+    padding-bottom: 0;
+}
+
+.row-checkbox [type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
+    border: 1px solid #6b787f;
+}
+
+@media only screen and (max-width: 600px) {
+    .task-list .row {
+      display: unset;
+    }
 }

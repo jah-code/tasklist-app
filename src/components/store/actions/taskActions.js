@@ -27,15 +27,31 @@ export const deleteTask = (id) => {
     }
 }
 
-export const updateTask = (id) => {
+export const updateTask = (newTaskRow) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('tasks').doc(id).update({
-            taskname: 'test'
+        firestore.collection('tasks').doc(newTaskRow.id).update({
+            taskname: newTaskRow.taskname,
+            id: newTaskRow.id
         }).then(() => {
-            dispatch({type: 'UPDATE_TASK', id})
+            dispatch({type: 'UPDATE_TASK', newTaskRow})
         }).catch((error) => {
             dispatch({type: 'UPDATE_TASK_ERROR', error});
+        })
+       
+    };
+}
+
+export const completedTask = (checkRow) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('tasks').doc(checkRow.id).update({
+            isCompleted: !checkRow.isCompleted,
+            id: checkRow.id
+        }).then(() => {
+            dispatch({type: 'COMPLETED_TASK', checkRow})
+        }).catch((error) => {
+            dispatch({type: 'COMPLETED_TASK_ERROR', error});
         })
        
     };

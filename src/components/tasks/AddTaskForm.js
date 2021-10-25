@@ -4,7 +4,8 @@ import { addTask } from '../../components/store/actions/taskActions'
 
 class AddTaskForm extends Component {
     state = {
-        taskname: ""
+        taskname: "",
+        isCompleted: false
     }
 
     handleChange = (e) => {
@@ -23,6 +24,7 @@ class AddTaskForm extends Component {
     }
 
     render() { 
+        const { addSuccess } = this.props;
         return (
             <form action="" className="add-task-form" onSubmit={this.handleSubmit}>
                 <div className="input-field add-task-input-field">
@@ -34,15 +36,25 @@ class AddTaskForm extends Component {
                     <i className="tiny material-icons">add</i>
                     &nbsp;New Task
                 </button>
+                <div className="green-text center">
+                    {/* { addSuccess ? <span>{addSuccess}</span> : null} */}
+                </div>
             </form>
         )
     }
 }
  
+
+const mapStateToProps = (state) => {
+    return {
+        addSuccess: state.task.addSuccess
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addTask: (task) => dispatch(addTask(task))
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddTaskForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AddTaskForm)

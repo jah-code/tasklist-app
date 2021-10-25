@@ -1,20 +1,20 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { deleteTask } from '../store/actions/taskActions'
+import React, { useState } from 'react'
 
 function TaskListRow(props) {
-    const { task, handleClickEdit } = props;
-
-    function handleClickDelete() {
-        props.deleteTask(props.task.id);
-    }
+    const { task, handleClickEdit, handleClickDelete, handleCheckRow, checkRow } = props;
 
     return (
         <tr>
-            <td style={{'width': '5%'}}>
+            <td style={{'width': '5%'}} className="row-checkbox">
+                <label>
+                    <input type="checkbox" className="filled-in" 
+                    checked={checkRow.isCompleted}
+                    onChange={(e) => handleCheckRow(e, task)}/>
+                    <span></span>
+                </label>
             </td>
             <td style={{'width': '85%'}}>
-                <span className="col-task-name blue-text text-accent-2">
+                <span className={`col-task-name ${checkRow.isCompleted === true ? 'task-completed' : 'task-todo'}`}>
                     {task.taskname}
                 </span>
             </td>
@@ -24,7 +24,7 @@ function TaskListRow(props) {
                 </div>
             </td>
             <td style={{'width': '5%'}}>
-                <div className="btn-action" onClick={handleClickDelete}>
+                <div className="btn-action" onClick={(e) => handleClickDelete(e, task)}>
                     <i className="material-icons">delete</i>
                 </div>
             </td>
@@ -32,10 +32,4 @@ function TaskListRow(props) {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        deleteTask: (id) => dispatch(deleteTask(id))
-    }
-}
-
-export default connect(null,mapDispatchToProps)(TaskListRow)
+export default TaskListRow

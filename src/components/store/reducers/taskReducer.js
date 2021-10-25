@@ -10,8 +10,10 @@ const initialState = {
 const taskReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TASK' :
-            console.log(action.task);
-            return state;
+            return {
+                state,
+                addSuccess: 'Successfully Added'
+            }
         case 'ADD_TASK_ERROR' :
             console.log(action.error)
             return state;
@@ -21,6 +23,9 @@ const taskReducer = (state = initialState, action) => {
         case 'UPDATE_TASK' :
             console.log('Update Task');
             return state;
+        case 'COMPLETED_TASK' :
+            console.log('Task Completed');
+            return state
         default :
             return state;
     }
