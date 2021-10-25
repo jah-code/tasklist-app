@@ -1,0 +1,125 @@
+.card {
+    border-radius: 10px;
+    margin: 10px 0;
+    height: 12em;
+}
+
+.card-title {
+    color: rgba(0,0,0,0.87);
+}
+
+.card-content {
+    color: #787878;
+}
+
+.count {
+    font-size: 50pt;
+}
+
+canvas {
+    margin: auto;
+    width: 130px !important;
+    height: 130px !important;
+}
+
+.task-list {
+    margin-top: 2em;
+}
+
+.task-table {
+    background-color: white;
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.table-title {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 0 2px;
+    background-color: #d9dfeb;
+    margin: 0;
+}
+
+.input-field input[type=text]:not(.browser-default) {
+    border-bottom: none;
+    margin-bottom: 0;
+    height: 38px;
+    font-size: 14px;
+}
+
+.input-field .prefix {
+    font-size: 23px;
+    color: #6b787f !important;
+    text-align: center;
+}
+
+.input-field input::placeholder {
+    color: #6b787f !important;
+}
+
+.input-field input:focus {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.ReactModal__Overlay--after-open {
+    z-index: 2;
+}
+
+.ReactModal__Content {
+    width: 320px;
+    height: 210px;
+    margin: auto;
+    border-radius: 10px !important;
+}
+
+.add-task-form .input-field {
+    padding: 0 10px;
+    margin-top: 2em;
+}
+.add-task-form .btn {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.col-task-name {
+    font-size: 18px;
+}
+
+.btn-action {
+    color: #6b787f;
+    cursor: pointer;
+}
+
+.btn-action:hover {
+    color: #448aff;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    border: 2px solid #448AFF;
+    background-color: #448AFF;
+}
+
+.no-content {
+    display: flex;
+    min-height: 90vh;
+}
+
+.no-task-box {
+    margin: auto;
+    width: 300px;
+    height: 150px;
+    text-align: center;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.no-task-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+}

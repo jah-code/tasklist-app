@@ -1,0 +1,9 @@
+.btn-avatar {
+    background-color: white;
+    color: #c2185b;
+}
+
+nav a,
+nav ul a {
+    color: rgba(0,0,0,0.87);
+}
