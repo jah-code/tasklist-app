@@ -11,7 +11,7 @@ const taskReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TASK' :
             return {
-                state,
+                ...state,
                 addSuccess: 'Successfully Added'
             }
         case 'ADD_TASK_ERROR' :

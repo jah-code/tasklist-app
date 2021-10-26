@@ -13,10 +13,6 @@ function TaskList(props) {
         taskname: "",
         id: ""
     })
-    const [ checkRow, setCheckRow ] = useState({
-        isCompleted: false,
-        id: "795735939"
-    });
 
     const [ find, setFind ] = useState('');
     const [searchParam] = useState(["taskname"]);
@@ -43,27 +39,6 @@ function TaskList(props) {
 
         setEditTaskRow(rowFormValues)
     }
-
-    function handleCheckRow(e, task) {
-        const newRowData = { 
-            isCompleted: !checkRow.isCompleted,
-            id: task.id
-         };
-
-        const id = task.id;
-
-        { tasks.map(currentTask => currentTask.id === id ? (
-            setCheckRow(newRowData)
-            ) : (
-            null
-            )
-        )}
-    }
-
-    useEffect(() => {
-        props.completedTask(checkRow);
-        console.log(checkRow);
-    },[checkRow]);
 
     function handleClickCancel(id) {
         setEditTaskId(null);
@@ -121,14 +96,11 @@ function TaskList(props) {
                                         handleClickCancel={handleClickCancel} 
                                         editTaskRow={editTaskRow} 
                                         handleEditChange={handleEditChange}
-                                        handleCheckRow={handleCheckRow}
                                     />
                                      ) : ( 
                                      <TaskListRow task={task} 
                                         handleClickEdit={handleClickEdit} 
                                         handleClickDelete={handleClickDelete}
-                                        handleCheckRow={handleCheckRow}
-                                        checkRow={checkRow}
                                     /> 
                                      )}
                                 </Fragment>
@@ -152,3 +124,30 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(TaskList)
+
+
+
+//////////////////////////////////////////////////////////////
+//////// TO DO - isCompleted will save to Firestore //////////
+//////////////////////////////////////////////////////////////
+    // function handleCheckRow(e, task) {
+    //     const checked = e.target.checked;
+        
+    //     {
+    //         tasks.map((currentTask) => {
+    //             if( currentTask.id === task.id ) {
+    //                 setCheckRow({
+    //                     isCompleted: checked
+    //                 })
+                    
+    //             }
+    //             else {
+    //                 return currentTask
+    //             }
+    //         })
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     props.completedTask(checkRow);
+    // },[checkRow]);

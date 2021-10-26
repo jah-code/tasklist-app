@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux'
 import { addTask } from '../../components/store/actions/taskActions'
 
@@ -6,6 +6,15 @@ class AddTaskForm extends Component {
     state = {
         taskname: "",
         isCompleted: false
+    }
+
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+      }
+
+    componentDidMount() {
+        this.myRef.current.focus();
     }
 
     handleChange = (e) => {
@@ -21,6 +30,7 @@ class AddTaskForm extends Component {
         this.setState({
             taskname: ""
         })
+        this.myRef.current.focus();
     }
 
     render() { 
@@ -29,7 +39,8 @@ class AddTaskForm extends Component {
             <form action="" className="add-task-form" onSubmit={this.handleSubmit}>
                 <div className="input-field add-task-input-field">
                     <input type="text" className="validate" value={this.state.taskname}
-                        id="taskname" placeholder="Task Name" onChange={this.handleChange}/>
+                        id="taskname" placeholder="Task Name" onChange={this.handleChange}
+                        ref={this.myRef} />
                 </div>
                 <button className="btn blue accent-2 waves-effect waves-light" 
                     type="submit" name="action">

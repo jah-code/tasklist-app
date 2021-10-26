@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import './style.css'
 import { connect } from 'react-redux'
 import { signIn } from '../store/actions/authActions'
@@ -8,6 +8,15 @@ class SignIn extends Component {
      state = {
         email: '',
         password: ''
+    }
+
+    constructor(props) {
+        super(props);
+        this.myRef = createRef();
+      }
+
+    componentDidMount() {
+        this.myRef.current.focus();
     }
 
     handleLoginChange = (e) => {
@@ -33,7 +42,8 @@ class SignIn extends Component {
                     <form action="" onSubmit={this.handleLoginSubmit} className="form-login">
                         <div className="input-field login-input-field">
                             <input type="text" className="validate" 
-                                id="email" placeholder="Email" onChange={this.handleLoginChange}/>
+                                id="email" placeholder="Email" onChange={this.handleLoginChange}
+                                ref={this.myRef} />
                         </div>
                         <div className="input-field login-input-field">
                             <input type="text" className="validate" 
