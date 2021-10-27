@@ -12,6 +12,7 @@ function AddTaskModal({modalIsOpen, setModalIsOpen}) {
                     New Task
                 </div>
                 <AddTaskForm/>
+                <p className="close-modal" onClick={() => setModalIsOpen(false)}>Cancel</p>
             </Modal>
         </div>
     )

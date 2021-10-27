@@ -9,25 +9,29 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import NoTaskList from '../tasks/NoTaskList';
 import { Redirect } from 'react-router-dom'
+import Loader from '../helpers/Loader'
 
 function Dashboard({tasks, auth}) {
     if (!auth.uid) return <Redirect to='/signin'/>
     return (
         <>
-        { tasks && tasks.length > 0 ?
-            <div className="dashboard container">
-                <div className="row">
-                    <div className="col s12 m4"><TaskCounter/></div>
-                    <div className="col s12 m4"><NewTasks/></div>
-                    <div className="col s12 m4"><TaskChart/></div>
-                </div>
+        { tasks ? 
+            ( tasks.length > 0 ?
+                <div className="dashboard container">
+                    <div className="row">
+                        <div className="col s12 m4"><TaskCounter/></div>
+                        <div className="col s12 m4"><NewTasks/></div>
+                        <div className="col s12 m4"><TaskChart/></div>
+                    </div>
 
-                <TaskList tasks={tasks}/>
-            </div> :
+                    <TaskList tasks={tasks}/>
+                </div> :
 
-            <div className="no-content">
-                <NoTaskList/>
-            </div>            
+                <div className="no-content">
+                    <NoTaskList/>
+                </div> 
+            ) 
+            : <Loader/>         
         }
         </>
     )

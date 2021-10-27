@@ -72,9 +72,10 @@ canvas {
 
 .ReactModal__Content {
     width: 320px;
-    height: 220px;
+    height: 240px;
     margin: auto;
     border-radius: 10px !important;
+    cursor: pointer;
 }
 
 .add-task-form .input-field {
@@ -168,4 +169,11 @@ button.btn-action {
     .task-list .row {
       display: unset;
     }
+}
+
+.close-modal {
+    text-align: center;
+    font-size: 13px;
+    color: #6a6a6a;
+    text-decoration: underline;
 }
