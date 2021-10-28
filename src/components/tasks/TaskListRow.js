@@ -1,31 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { completedTask } from '../store/actions/taskActions'
 
 function TaskListRow(props) {
     const { task, handleClickEdit, handleClickDelete} = props;
     const [ itemChecked, setItemChecked ] = useState({});
-    const [ checkRow, setCheckRow ] = useState(false);
+    const [ isCompleted, setIsCompleted ] = useState({
+        id: '898788',
+        isCompleted: false
+    })
 
     function handleCheckRow(task, e) {
         itemChecked[task.id] = e.target.checked;
         setItemChecked(itemChecked);
 
         const changedCheck = itemChecked[task.id];
-        setCheckRow(changedCheck);
-
+        
+        setIsCompleted({
+            id: task.id,
+            isCompleted: changedCheck
+        })
     }
+
+    useEffect(() => {
+        props.completedTask(isCompleted)
+    }, [isCompleted])
 
     return (
         <tr>
             <td style={{'width': '5%'}} className="row-checkbox">
                 <label>
                     <input type="checkbox" className="filled-in" 
-                    checked={checkRow}
+                    checked={task.isCompleted}
                     onChange={(e) => handleCheckRow(task, e)}/>
                     <span></span>
                 </label>
             </td>
             <td style={{'width': '85%'}}>
-                <span className={`col-task-name ${checkRow === true ? 'task-completed' : 'task-todo'}`}>
+                <span className={`col-task-name ${task.isCompleted === true ? 'task-completed' : 'task-todo'}`}>
                     {task.taskname}
                 </span>
             </td>
@@ -43,4 +55,10 @@ function TaskListRow(props) {
     )
 }
 
-export default TaskListRow
+const mapDispatchToProps = (dispatch) => {
+    return {
+        completedTask: (isCompleted) => dispatch(completedTask(isCompleted))
+    }
+} 
+
+export default connect(null, mapDispatchToProps)(TaskListRow)

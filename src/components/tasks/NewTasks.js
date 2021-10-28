@@ -1,7 +1,10 @@
 import './style.css'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-function NewTasks() {
+function NewTasks(props) {
+    const { tasks } = props;
+    const [ newTasks, setNewTasks ] = useState('');
+
     return (
         <div className="card white z-depth-2">
             <div className="card-content">

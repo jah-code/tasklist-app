@@ -42,14 +42,13 @@ export const updateTask = (newTaskRow) => {
     };
 }
 
-export const completedTask = (checkRow) => {
+export const completedTask = (isCompleted) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         const firestore = getFirestore();
-        firestore.collection('tasks').doc(checkRow.id).update({
-            isCompleted: !checkRow.isCompleted,
-            id: checkRow.id
+        firestore.collection('tasks').doc(isCompleted.id).update({
+            isCompleted: isCompleted.isCompleted
         }).then(() => {
-            dispatch({type: 'COMPLETED_TASK', checkRow})
+            dispatch({type: 'COMPLETED_TASK', isCompleted})
         }).catch((error) => {
             dispatch({type: 'COMPLETED_TASK_ERROR', error});
         })

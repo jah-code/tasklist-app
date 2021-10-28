@@ -1,10 +1,20 @@
 import './style.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pie, defaults } from 'react-chartjs-2'
 
 defaults.plugins.legend.display = false
 
-function TaskChart() {
+function TaskChart(props) {
+    const { tasks } = props;
+    const [ completedCounter, setCompletedCounter ] = useState('');
+
+    useEffect(() => {
+        {
+            const total = tasks.reduce((a, b) => b.isCompleted ? ++a : a, 0);
+            setCompletedCounter(total);
+        }
+    }, [tasks])
+
     return (
         <div className="card white z-depth-2">
             <div className="card-content">
@@ -16,12 +26,12 @@ function TaskChart() {
                       ],
                       datasets: [{
                         label: 'Task Chart',
-                        data: [5, 15],
+                        data: [completedCounter, tasks.length - completedCounter ],
                         backgroundColor: [
                           '#448AFF',
                           '#efefef'
                         ],
-                        hoverOffset: 4
+                        hoverOffset: completedCounter
                     }]
                 }}
                 height={400}

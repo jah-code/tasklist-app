@@ -3,7 +3,7 @@ import AddTaskModal from './AddTaskModal';
 import TaskListRow from './TaskListRow'
 import TaskListRowEdit from './TaskListRowEdit';
 import { connect } from 'react-redux'
-import { updateTask, deleteTask, completedTask } from '../store/actions/taskActions'
+import { updateTask, deleteTask } from '../store/actions/taskActions'
 
 function TaskList(props) {
     const { tasks } = props;
@@ -119,35 +119,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         updateTask: (newTaskRow) => dispatch(updateTask(newTaskRow)),
         deleteTask: (id) => dispatch(deleteTask(id)),
-        completedTask: (checkRow) => dispatch(completedTask(checkRow))
     }
 }
 
 export default connect(null, mapDispatchToProps)(TaskList)
-
-
-
-//////////////////////////////////////////////////////////////
-//////// TO DO - isCompleted will save to Firestore //////////
-//////////////////////////////////////////////////////////////
-    // function handleCheckRow(e, task) {
-    //     const checked = e.target.checked;
-        
-    //     {
-    //         tasks.map((currentTask) => {
-    //             if( currentTask.id === task.id ) {
-    //                 setCheckRow({
-    //                     isCompleted: checked
-    //                 })
-                    
-    //             }
-    //             else {
-    //                 return currentTask
-    //             }
-    //         })
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     props.completedTask(checkRow);
-    // },[checkRow]);

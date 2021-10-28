@@ -19,9 +19,9 @@ function Dashboard({tasks, auth}) {
             ( tasks.length > 0 ?
                 <div className="dashboard container">
                     <div className="row">
-                        <div className="col s12 m4"><TaskCounter/></div>
-                        <div className="col s12 m4"><NewTasks/></div>
-                        <div className="col s12 m4"><TaskChart/></div>
+                        <div className="col s12 m4"><TaskCounter tasks={tasks}/></div>
+                        <div className="col s12 m4" style={{display: 'none'}}><NewTasks tasks={tasks}/></div>
+                        <div className="col s12 m4"><TaskChart tasks={tasks}/></div>
                     </div>
 
                     <TaskList tasks={tasks}/>

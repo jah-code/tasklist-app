@@ -24,7 +24,6 @@ const taskReducer = (state = initialState, action) => {
             console.log('Update Task');
             return state;
         case 'COMPLETED_TASK' :
-            console.log('Task Completed');
             return state
         default :
             return state;
