@@ -20,7 +20,7 @@ function Dashboard({tasks, auth}) {
                 <div className="dashboard container">
                     <div className="row">
                         <div className="col s12 m4"><TaskCounter tasks={tasks}/></div>
-                        <div className="col s12 m4" style={{display: 'none'}}><NewTasks tasks={tasks}/></div>
+                        <div className="col s12 m4"><NewTasks tasks={tasks}/></div>
                         <div className="col s12 m4"><TaskChart tasks={tasks}/></div>
                     </div>
 
@@ -47,6 +47,6 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        {collection: 'tasks'}
+        {collection: 'tasks', orderBy: ['createdAt', 'desc']}
     ])
 )(Dashboard)
